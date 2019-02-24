@@ -56,7 +56,7 @@
 
 - name: create tomcat init script
   get_url:
-     url: https://github.com/cit31/project-1/blob/master/tomcat-init
+     url: https://raw.githubusercontent.com/satyamanasala/tomcat-init-script/master/tomcatinit
      dest: /etc/init.d/tomcat
      mode: 0755             
 - name: start tomcat service
@@ -64,5 +64,5 @@
     name: tomcat
     state: started
     enabled: yes
-  become_user: root
+  
     
