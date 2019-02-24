@@ -1,0 +1,3 @@
+DBUSER: student
+DBPASS: student@1
+DBIP: "{{ansible_hostname}}"
