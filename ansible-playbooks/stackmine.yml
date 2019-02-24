@@ -1,6 +1,6 @@
 - name: Application setup for complete stack
   hosts: all
   become: yes
-  gather_facts: yes
+  gather_facts: no
   roles:
       - sample
