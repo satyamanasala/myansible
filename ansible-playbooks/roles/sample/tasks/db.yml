@@ -12,9 +12,9 @@
     state: started
     enabled: yes
 
-- name: Create database studentapp
+- name: Create database studentappln
   mysql_db:
-    name: studentapp
+    name: studentappln
     state: present
 
 - name: copy students table from file
@@ -39,5 +39,5 @@
   mysql_user:
      name: "{{DBUSER}}"
      password: "{{DBPASS}}"
-     priv: 'studentapp.*:ALL'
+     priv: 'studentappln.*:ALL'
      host: "{{ansible_fqdn}}"
