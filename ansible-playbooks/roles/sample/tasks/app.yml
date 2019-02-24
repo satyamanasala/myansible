@@ -29,7 +29,7 @@
 - name: download war file
   get_url:
       url: "{{APP_WAR}}"
-      dest: "{{TOMCAT_DIR}}/webapps/{{WAR_FILENAME}}
+      dest: "{{TOMCAT_DIR}}/webapps/{{WAR_FILENAME}}"
   become_user: studentappln
 
 - name: download jdbc URL
