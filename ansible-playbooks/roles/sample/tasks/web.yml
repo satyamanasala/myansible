@@ -13,10 +13,3 @@
     name: httpd
     state: restarted
     enabled: yes
-
-ansible-playbook playbooks/stack.yml --tags APP
-
-
-CHECK THE APP NOW ON BROWSER..
-IF ANY ERROR
-cat catalina.out
