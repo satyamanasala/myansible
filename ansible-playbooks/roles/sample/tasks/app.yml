@@ -28,14 +28,14 @@
 
 - name: download war file
   get_url:
-      url: "{{APP_WAR}}"
-      dest: "{{TOMCAT_DIR}}/webapps/{{WAR_FILENAME}}"
+      url: "{{WAR_APP}}"
+      dest: "{{TOMCAT_DIR}}/webapps/{{WAR_FILE}}"
   become_user: studentappln
 
 - name: download jdbc URL
   get_url:
       url: "{{JDBC_URL}}"
-      dest: "{{TOMCAT_DIR}}/lib/{{JDBC_FILENAME}}"
+      dest: "{{TOMCAT_DIR}}/lib/{{JDBC_FILE}}"
   become_user: studentappln
 
 - name: Include variable in Dev DB Parameters
