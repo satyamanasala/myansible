@@ -16,4 +16,4 @@
     - name: Setup Facts 
       template:
         dest: /etc/ansible/facts.d/info.fact
-        src: info.fact.j2
+        src: ansible-playbooks/templates/info.fact.j2
