@@ -24,9 +24,8 @@
 
 - name: import file table schema to mysql
   mysql_db:
-   name: mysql
-   state: import
    name: all
+   state: import
    target: /tmp/student.sql
 
 - name: include database user parameteres
