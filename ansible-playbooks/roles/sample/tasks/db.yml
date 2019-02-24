@@ -22,7 +22,7 @@
     src: student.sql
     dest: /tmp/student.sql
 
-- name: import file(table schema) to mysql
+- name: import file table schema to mysql
   mysql_db:
    name: mysql
    state: import
@@ -34,8 +34,6 @@
     file: dbparams.yml
 
 - name: create database user 
-#  vars:
-#    include_vars: dbparams.yml
   mysql_user:
      name: "{{DBUSER}}"
      password: "{{DBPASS}}"
