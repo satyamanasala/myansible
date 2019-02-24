@@ -12,9 +12,9 @@
     state: started
     enabled: yes
 
-- name: Create database studentappln
+- name: Create database studentapp
   mysql_db:
-    name: studentappln
+    name: studentapp
     state: present
 
 - name: copy students table from file
