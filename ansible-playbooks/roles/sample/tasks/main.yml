@@ -1,14 +1,27 @@
-- name: Include web play
+- name: Inlcude Web Play 
   include: web.yml
   tags:
-   - WEB
-   - APP
-- name: Include App play
+    - WEB
+    - APP
+  when: DB is undefined
+
+- name: Include App Play 
   include: app.yml
   tags:
-   - WEB
-   - APP
-- name: Include DB play
+    - WEB 
+    - APP
+  when: DB is undefined 
+
+- name: Fact 
+  debug: msg="{{ansible_local.info.env}}"
+
+- name: Include DB Play 
   include: db.yml
   tags:
-   - DB
+    - DB
+  when: ansible_local.info.env == "DEV" and DB is undefined
+
+- name: Run DB play for PROD
+  include: db.yml
+  when: DB is defined
+
