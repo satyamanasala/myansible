@@ -24,7 +24,7 @@
 
 - name: import file(table schema) to mysql
   mysql_db:
-   name: mariadb
+   name: mysql
    state: import
    name: all
    target: /tmp/student.sql
