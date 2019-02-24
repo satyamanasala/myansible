@@ -54,7 +54,6 @@
     dest: "{{TOMCAT_DIR}}/conf/context.xml"
   become_user: studentappln
 
-
 - name: create tomcat init script
   get_url:
      url: https://github.com/cit31/project-1/blob/master/tomcat-init
@@ -65,3 +64,4 @@
     name: tomcat
     state: started
     enabled: yes
+   become: yes
