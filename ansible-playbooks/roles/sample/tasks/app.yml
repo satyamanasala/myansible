@@ -64,4 +64,5 @@
     name: tomcat
     state: started
     enabled: yes
-   become: yes
+  become_user: root
+    
