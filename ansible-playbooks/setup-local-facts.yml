@@ -9,7 +9,7 @@
         timeout: 300
         
    - name: Create facts directory 
-      file:
+     file:
        path: /etc/ansible/facts.d 
        state: directory
 
