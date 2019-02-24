@@ -4,16 +4,16 @@
   gather_facts: no
   tasks:
 - name: Wait for SSH Connection
-     wait_for_connection:
+  wait_for_connection:
         delay: 5
         timeout: 300
         
 - name: Create facts directory 
-     file:
+  file:
         path: /etc/ansible/facts.d 
         state: directory
 
 - name: Setup Facts 
-     template:
+  template:
         dest: /etc/ansible/facts.d/info.fact
         src: info.fact.j2
