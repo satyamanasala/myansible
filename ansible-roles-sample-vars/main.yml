@@ -1,0 +1,11 @@
+TOMCAT_URL: https://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.16/bin/apache-tomcat-9.0.16.tar.gz
+TAR_FILE: "{{ TOMCAT_URL.split('/')|last }}"
+
+TOMCAT_DIR: "/home/studentappln/{{TAR_FILE | regex_replace('.tar.gz')}}"
+
+
+WAR_APP: https://github.com/cit31/project-1/raw/master/student.war
+WAR_FILE: "{{ WAR_APP.split('/')|last }}"
+
+JDBC_URL: https://github.com/cit31/project-1/raw/master/mysql-connector-java-5.1.40.jar
+JDBC_FILE: "{{ JDBC_URL.split('/')|last }}"

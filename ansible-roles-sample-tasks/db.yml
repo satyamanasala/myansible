@@ -1,0 +1,43 @@
+- name: Install maria db server
+  package:
+    name: "{{item}}"
+    state: present
+  loop:
+     - MySQL-python
+     - mariadb-server
+
+- name: start mariadb service                                 
+  service: 
+    name: mariadb
+    state: started
+    enabled: yes
+
+- name: Create database studentapp
+  mysql_db:
+    name: studentapp
+    state: present
+
+- name: copy students table from file
+  copy:
+    src: student.sql
+    dest: /tmp/student.sql
+
+- name: import file(table schema) to mysql
+  mysql_db:
+   name: mariadb
+   state: import
+   name: all
+   target: /tmp/student.sql
+
+- name: include database user parameteres
+  include_vars:
+    file: dbparams.yml
+
+- name: create database user 
+#  vars:
+#    include_vars: dbparams.yml
+  mysql_user:
+     name: "{{DBUSER}}"
+     password: "{{DBPASS}}"
+     priv: 'studentapp.*:ALL'
+     host: "{{ansible_fqdn}}"

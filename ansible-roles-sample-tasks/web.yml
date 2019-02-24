@@ -1,0 +1,22 @@
+- name: Install http server
+  package:
+    name: httpd
+    state: installed
+
+- name: udpate proxy config
+  template:
+     src: tomcat.conf.j2
+     dest: /etc/httpd/conf.d/tomcat.conf
+
+- name: restart httpd service
+  service:  
+    name: httpd
+    state: restarted
+    enabled: yes
+
+ansible-playbook playbooks/stack.yml --tags APP
+
+
+CHECK THE APP NOW ON BROWSER..
+IF ANY ERROR
+cat catalina.out

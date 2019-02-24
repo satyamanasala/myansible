@@ -1,0 +1,14 @@
+- name: Include web play
+  include: web.yml
+  tags:
+   - WEB
+   - APP
+- name: Include App play
+  include: app.yml
+  tags:
+   - WEB
+   - APP
+- name: Include DB play
+  include: db.yml
+  tags:
+   - DB

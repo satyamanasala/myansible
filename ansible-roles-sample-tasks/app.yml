@@ -1,0 +1,69 @@
+- name: Installing java
+  package:
+     name: java
+     state: present
+
+- name: adding user for student application
+  user:
+    name: studentappln
+
+
+- name: download & extract tomcat
+  unarchive:
+    src: "{{TOMCAT_URL}}"
+    dest: /home/studentappln/
+    remote_src: yes
+  become_user: studentappln
+
+- name: find files for webapps
+  find:
+   path: "{{TOMCAT_DIR}}/webapps"
+   file_type: any
+  register: out
+
+- name: Remove the files in webapps
+  file:
+   path: "{{item.path}}"
+   state: absent
+  loop: "{{out.files}}"
+
+- name: download war file
+  become_user: studentappln
+  get_url:
+      url: "{{WAR_APP}}"
+      dest: "{{TOMCAT_DIR}}/webapps/{{WAR_FILE}}"
+  become_user: studentappln
+
+- name: download jdbc URL
+  get_url:
+      url: "{{JDBC_URL}}"
+      dest: "{{TOMCAT_DIR}}/lib/{{JDBC_FILE}}"
+  become_user: studentappln
+
+
+#on the remote node copy /home/studentappln/apache-tomcat-9.0.16/conf/context.xml and paste in 
+# workstation /ansible/roles/sample/context.xml.j2
+
+- name: include variables of DB parameters
+  include_vars:
+    file: dbparams.yml
+
+- name: update the context.xml file
+  template:
+    src: context.xml.j2
+    dest: "{{TOMCAT_DIR}}/conf/context.xml"
+  become_user: studentappln
+
+- name: create tomcat init script
+  template:
+     src: tomcat.j2
+     dest: /etc/init.d/tomcat
+     mode: 0755          
+   
+- name: start tomcat service
+  service:
+    name: tomcat
+    state: started
+    enabled: yes
+
+  
