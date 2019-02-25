@@ -8,7 +8,7 @@
     name: studentappln
 
 - name: download & extract tomcat file
-   command: TOMCAT_URL
+   command: "{{TOMCAT_URL}}"
    dest: /home/studentappln/
    become_user: studentappln
       
