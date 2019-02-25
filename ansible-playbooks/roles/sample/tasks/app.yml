@@ -10,7 +10,7 @@
 - name: tomcat donwload
   command:
   args:
-    vars:
+    argv:
       - TOMCAT_URL
       
 
