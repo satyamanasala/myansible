@@ -9,8 +9,8 @@
 
 - name: download tomcat file
   command:
-      args:
-      argv:
+  args:
+    argv:
        TOMCAT_URL
   become_user: studentappln
       
