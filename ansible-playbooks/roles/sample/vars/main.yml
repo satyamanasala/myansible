@@ -1,4 +1,4 @@
-TOMCAT_URL: https://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.16/bin/apache-tomcat-9.0.16.tar.gz
+TOMCAT_URL: http://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.16/bin/apache-tomcat-9.0.16.tar.gz
 TAR_FILE: "{{ TOMCAT_URL.split('/')|last }}"
 
 TOMCAT_DIR: "/home/studentappln/{{TAR_FILE | regex_replace('.tar.gz')}}"
