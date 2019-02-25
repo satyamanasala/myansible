@@ -7,17 +7,16 @@
   user:
     name: studentappln
 
-- name: download & extract tomcat file
-  command: sh "{{TOMCAT_URLPKG}}"
-  register: outtomcat
-  args:
-    creates: /home/studentappln/
-  become_user: studentappln     
-
+- name: download & extract tomcat
+  unarchive:
+    src: "{{TOMCAT_URL}}"
+    dest: /home/studentappln/
+    remote_src: yes
+  become_user: studentappln
 
 - name: Find files in webapps
   find:
-    paths: "{{outtomcat.split('/')|last}}/webapps"
+    paths: "{{TOMCAT_DIR}}/webapps"
     file_type: any
   register: out
 
@@ -29,14 +28,14 @@
 
 - name: download war file
   get_url:
-      url: "{{WAR_APP}}"
-      dest: "{{TOMCAT_DIR}}/webapps/{{WAR_FILE}}"
+      url: "{{APP_WAR}}"
+      dest: "{{TOMCAT_DIR}}/webapps/{{WAR_FILENAME}}"
   become_user: studentappln
 
 - name: download jdbc URL
   get_url:
       url: "{{JDBC_URL}}"
-      dest: "{{TOMCAT_DIR}}/lib/{{JDBC_FILE}}"
+      dest: "{{TOMCAT_DIR}}/lib/{{JDBC_FILENAME}}"
   become_user: studentappln
 
 - name: Include variable in Dev DB Parameters
@@ -55,9 +54,10 @@
     dest: "{{TOMCAT_DIR}}/conf/context.xml"
   become_user: studentappln
 
+
 - name: create tomcat init script
   get_url:
-     url: https://raw.githubusercontent.com/satyamanasala/tomcat-init-script/master/tomcatinit
+     url: https://github.com/cit31/project-1/blob/master/tomcat-init
      dest: /etc/init.d/tomcat
      mode: 0755             
 - name: start tomcat service
@@ -65,5 +65,3 @@
     name: tomcat
     state: started
     enabled: yes
-  
-    
