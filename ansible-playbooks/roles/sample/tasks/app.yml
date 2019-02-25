@@ -9,7 +9,8 @@
 
 - name: download & extract tomcat file
   command: sh "{{TOMCAT_URL}}"
-   dest: /home/studentappln/
+  args:
+    creates: /home/studentappln/
   become_user: studentappln
       
 
