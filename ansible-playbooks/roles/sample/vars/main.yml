@@ -1,4 +1,4 @@
-  TOMCAT_URL: "{{curl https://tomcat.apache.org/download-90.cgi | grep tar.gz | grep nofollow | head -1 | awk -F \" '{print $2}'}}"
+  TOMCAT_URL: curl https://tomcat.apache.org/download-90.cgi | grep tar.gz | grep nofollow | head -1 | awk -F \" '{print $2}'
   TAR_FILE: "{{ TOMCAT_URL.split('/')|last }}"
   TOMCAT_DIR: "/home/studentappln/{{TAR_FILE | regex_replace('.tar.gz')}}"
   WAR_APP: https://github.com/cit31/project-1/raw/master/student.war
