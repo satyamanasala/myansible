@@ -9,9 +9,9 @@
 
 - name: download & extract tomcat file
   command: sh "{{TOMCAT_URLPKG}}"
+  register: outtomcat
   args:
     creates: /home/studentappln/
-    register: outtomcat
   become_user: studentappln     
 
 
