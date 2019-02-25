@@ -3,6 +3,5 @@
   become: yes
   gather_facts: no
   tasks:
-    - debug:
-        msg: "debug test"
+    - sample
        
