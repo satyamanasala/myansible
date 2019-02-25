@@ -17,4 +17,3 @@
      template:
        dest: /etc/ansible/facts.d/info.fact
        src: info.fact.j2
-        
