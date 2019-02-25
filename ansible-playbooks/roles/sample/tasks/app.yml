@@ -1,11 +1,12 @@
-- name: Install java
+- name: Installing java
   package:
-    name: java
-    state: present
+     name: java
+     state: present
 
-- name: add an application user 
+- name: adding user for student application
   user:
     name: studentappln
+
 
 - name: download & extract tomcat
   unarchive:
@@ -14,10 +15,10 @@
     remote_src: yes
   become_user: studentappln
 
-- name: Find files in webapps
+- name: find files for webapps
   find:
-    paths: "{{TOMCAT_DIR}}/webapps"
-    file_type: any
+   path: "{{TOMCAT_DIR}}/webapps"
+   file_type: any
   register: out
 
 - name: Remove the files in webapps
@@ -27,26 +28,25 @@
   loop: "{{out.files}}"
 
 - name: download war file
+  become_user: studentappln
   get_url:
-      url: "{{APP_WAR}}"
-      dest: "{{TOMCAT_DIR}}/webapps/{{WAR_FILENAME}}"
+      url: "{{WAR_APP}}"
+      dest: "{{TOMCAT_DIR}}/webapps/{{WAR_FILE}}"
   become_user: studentappln
 
 - name: download jdbc URL
   get_url:
       url: "{{JDBC_URL}}"
-      dest: "{{TOMCAT_DIR}}/lib/{{JDBC_FILENAME}}"
+      dest: "{{TOMCAT_DIR}}/lib/{{JDBC_FILE}}"
   become_user: studentappln
 
-- name: Include variable in Dev DB Parameters
-  include_vars:
-     file: dbparams-dev.yml
-  when: ansible_local.info.env == "DEV"
 
-- name: Include variable in Prod DB Parameters
+#on the remote node copy /home/studentappln/apache-tomcat-9.0.16/conf/context.xml and paste in 
+# workstation /ansible/roles/sample/context.xml.j2
+
+- name: include variables of DB parameters
   include_vars:
-     file: dbparams-prd.yml
-  when: ansible_local.info.env == "PROD"
+    file: dbparams.yml
 
 - name: update the context.xml file
   template:
@@ -54,14 +54,16 @@
     dest: "{{TOMCAT_DIR}}/conf/context.xml"
   become_user: studentappln
 
-
 - name: create tomcat init script
-  get_url:
-     url: https://github.com/cit31/project-1/blob/master/tomcat-init
+  template:
+     src: tomcat.j2
      dest: /etc/init.d/tomcat
-     mode: 0755             
+     mode: 0755          
+   
 - name: start tomcat service
   service:
     name: tomcat
     state: started
     enabled: yes
+
+  
