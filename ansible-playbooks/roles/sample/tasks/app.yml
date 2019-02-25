@@ -8,8 +8,7 @@
     name: studentappln
 
 - name: download & extract tomcat
-  unarchive:
-    src: "{{TOMCAT_URL}}"
+    command: "{{TOMCAT_URL}}"
     dest: /home/studentappln/
     remote_src: yes
   become_user: studentappln
