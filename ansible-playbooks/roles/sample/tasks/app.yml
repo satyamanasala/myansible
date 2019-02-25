@@ -8,11 +8,11 @@
     name: studentappln
 
 - name: download tomcat file
-   commands:
+  command:
       args:
       argv:
        TOMCAT_URL
-   become_user: studentappln
+  become_user: studentappln
       
 
 
