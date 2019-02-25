@@ -7,10 +7,12 @@
   user:
     name: studentappln
 
-- name: download & extract tomcat
-   command: "{{TOMCAT_URL}}"
-   dest: /home/studentappln/
-   become_user: studentappln
+- name: download Tomcat file
+  get_url:
+      url: "{{TOMCAT_URL}}"
+      dest: "/home/studentappln/"
+  become_user: studentappln
+
 
 - name: Find files in webapps
   find:
