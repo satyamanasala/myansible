@@ -1,12 +1,7 @@
-  TOMCAT_URL: wget curl https://tomcat.apache.org/download-90.cgi | grep tar.gz | grep nofollow | head -1 | awk -F \" '{print $2}'
-- name: download & extract tomcat file
-  command: sh "{{TOMCAT_URL}}"
-  args:
-    creates: /home/studentappln/
-    register: out
-  become_user: studentappln    
-  
-  TAR_FILE: "{{ out.split('/')|last }}"
+  TOMCAT_URLPKG: sh wget curl https://tomcat.apache.org/download-90.cgi | grep tar.gz | grep nofollow | head -1 | awk -F \" '{print $2}'
+  TOMCAT_URL: "{{outtomcat}}"
+
+  TAR_FILE: "{{ TOMCAT_URL.split('/')|last }}"
   TOMCAT_DIR: "/home/studentappln/{{TAR_FILE | regex_replace('.tar.gz')}}"
   WAR_APP: https://github.com/cit31/project-1/raw/master/student.war
   WAR_FILE: "{{ WAR_APP.split('/')|last }}"
