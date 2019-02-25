@@ -8,9 +8,9 @@
     name: studentappln
 
 - name: download & extract tomcat
-    command: "{{TOMCAT_URL}}"
+  get_url:  
+    url: "{{TOMCAT_URL}}"
     dest: /home/studentappln/
-    remote_src: yes
   become_user: studentappln
 
 - name: Find files in webapps
