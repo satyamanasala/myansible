@@ -1,8 +1,7 @@
 - name: Getting tomcat url
-  command: http://mirrors.ibiblio.org/apache/tomcat/tomcat-9/v9.0.16/bin/apache-tomcat-9.0.16.tar.gz
+  command: curl https://tomcat.apache.org/download-90.cgi | grep tar.gz | grep nofollow | head -1 | awk -F \" '{print $2}'
   register: TOMCAT_URL
 
-#TOMCAT_URL: http://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.16/bin/apache-tomcat-9.0.16.tar.gz
 TAR_FILE: "{{ TOMCAT_URL.split('/')|last }}"
 
 TOMCAT_DIR: "/home/studentappln/{{TAR_FILE | regex_replace('.tar.gz')}}"
