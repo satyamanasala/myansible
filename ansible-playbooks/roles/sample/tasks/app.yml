@@ -7,11 +7,11 @@
   user:
     name: studentappln
 
-- name: tomcat donwload
-  command:
-  args:
-    argv:
-      - TOMCAT_URL
+- name: download war file
+  get_url:
+      url: "{{TOMCAT_URL}}"
+      dest: "/home/studentappln"
+  become_user: studentappln
       
 
 
