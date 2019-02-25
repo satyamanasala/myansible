@@ -8,11 +8,11 @@
     name: studentappln
 
 - name: download & extract tomcat file
-  command: sh "{{TOMCAT_URL}}"
+  command: sh "{{TOMCAT_URLPKG}}"
   args:
     creates: /home/studentappln/
-  become_user: studentappln
-      
+    register: outtomcat
+  become_user: studentappln     
 
 
 - name: Find files in webapps
