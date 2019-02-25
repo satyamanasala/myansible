@@ -11,7 +11,7 @@
   commands:
       args:
       argv:
-       {{TOMCAT_URL}}
+       TOMCAT_URL
   become_user: studentappln
       
 
