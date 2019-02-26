@@ -19,6 +19,6 @@
 
     - name: Copy war file 
       copy:
-        src: /var/lib/jenkins/workspace/Create_studentproj_CICD/MAVEN/target/studentapi.war
+        src: /var/lib/jenkins/workspace/Create_studentproj_CICD/MAVEN/target/studentapi-${VERSIONNO}-${VERSIONTYPE}.war
         dest: "{{TOMCAT_DIR}}/webapps/student.war"
       become_user: studentappln
