@@ -19,7 +19,7 @@
 
     - name: Copy war file 
       copy:
-        src: /var/lib/jenkins/workspace/student/testpipeline_converted/MAVEN/target/studentapi-${VERSIONNO}-${VERSIONTYPE}.war
+        src: /var/lib/jenkins/workspace/student/testpipeline_converted/MAVEN/target/studentapi-${VERSIONNO}-RELEASE.war
         dest: "{{TOMCAT_DIR}}/webapps/student.war"
         remote_src: yes
       become_user: studentappln
